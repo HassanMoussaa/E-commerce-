@@ -167,6 +167,21 @@ body {
 
 /* for responsive header  */
 
+@media (min-width: 1101px) and (max-width: 1212px) {
+  #container {
+    grid-template-columns: 1fr 1fr 4fr;
+  }
+
+  .postsSection h1 {
+    font-size: 25px;
+  }
+  #containerClothing,
+  #containerAccessories {
+    width: 95%;
+    grid-gap: 10px;
+  }
+}
+
 @media (min-width: 901px) and (max-width: 1100px) {
   #container {
     grid-template-columns: 1fr 1fr 5fr;
@@ -186,12 +201,6 @@ body {
 
   #input {
     max-width: 30em;
-  }
-}
-
-@media (min-width: 1101px) and (max-width: 1212px) {
-  #container {
-    grid-template-columns: 1fr 1fr 4fr;
   }
 }
 
@@ -222,6 +231,16 @@ body {
     height: 12em;
     margin-top: 8rem;
   }
+  .postsSection h1 {
+    width: 80%;
+  }
+  #containerClothing,
+  #containerAccessories {
+    display: grid;
+    grid-gap: 70px 20px;
+    grid-template-columns: repeat(3, 1fr);
+    width: 80%;
+  }
 }
 
 @media (max-width: 732px) {
@@ -249,10 +268,30 @@ body {
     justify-content: center;
     text-align: center;
   }
+
+  .postsSection h1 {
+    font-size: 20px;
+  }
+  .postsSection h1 {
+    width: 90%;
+  }
+  #containerClothing,
+  #containerAccessories {
+    width: 90%;
+  }
 }
 
 @media (max-width: 500px) {
   #containerSlider img {
     height: 10em;
+  }
+
+  .postsSection h1 {
+    width: 80%;
+  }
+  #containerClothing,
+  #containerAccessories {
+    width: 80%;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
