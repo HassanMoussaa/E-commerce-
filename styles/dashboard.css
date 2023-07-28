@@ -1,6 +1,8 @@
 body {
   margin: 0;
 }
+
+/* header work */
 #badge {
   position: absolute;
   background-color: rgb(255, 30, 30);
@@ -90,4 +92,79 @@ body {
 }
 #user a {
   color: rgb(29, 29, 29);
+}
+
+/* for responsive header  */
+
+@media (min-width: 901px) and (max-width: 1100px) {
+  #container {
+    grid-template-columns: 1fr 1fr 5fr;
+  }
+
+  #collection {
+    display: grid;
+  }
+
+  #search {
+    grid-column: 3 / span 1;
+  }
+
+  #user {
+    grid-column: 4 / span 1;
+  }
+
+  #input {
+    max-width: 30em;
+  }
+}
+
+@media (min-width: 1101px) and (max-width: 1212px) {
+  #container {
+    grid-template-columns: 1fr 1fr 4fr;
+  }
+}
+
+@media (max-width: 900px) {
+  #container {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  #collection {
+    display: none;
+  }
+
+  #search {
+    grid-column: span 2;
+  }
+
+  #user {
+    grid-column: span 2;
+  }
+
+  #input {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 650px) {
+  #container {
+    grid-template-columns: 1fr;
+    padding: 10px;
+  }
+
+  #shopName {
+    font-size: 30px;
+  }
+
+  #input {
+    padding: 2px 20px;
+  }
+
+  #user {
+    grid-column: span 2;
+    justify-content: center;
+    text-align: center;
+  }
 }
