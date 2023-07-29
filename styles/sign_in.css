@@ -35,6 +35,18 @@ input {
   border-radius: 4px;
 }
 
+label[for="user-type"] {
+  margin-bottom: 10px;
+}
+
+select#user-type {
+  width: 20rem;
+  padding: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
 .btn-container {
   display: flex;
   justify-content: space-between;
