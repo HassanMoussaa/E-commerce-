@@ -35,6 +35,34 @@ input {
   border-radius: 4px;
 }
 
+.custom-select {
+  position: relative;
+}
+
+.custom-select select {
+  width: 21rem;
+  padding: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  appearance: none; /* Hide default arrow */
+}
+
+.custom-select::after {
+  content: "\25BC"; /* Unicode character for down arrow */
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 14px;
+  pointer-events: none; /* Prevent click on the pseudo-element */
+}
+
+.custom-select select:focus {
+  outline: none;
+  border-color: #0056b3;
+}
+
 .btn-container {
   display: flex;
   justify-content: space-between;
@@ -48,19 +76,14 @@ button {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-}
-
-a {
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-
-  text-decoration: none;
+  width: 48%;
 }
 
 button:hover {
   background-color: #0056b3;
+}
+
+a {
+  text-decoration: none;
+  color: black;
 }
