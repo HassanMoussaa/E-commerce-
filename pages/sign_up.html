@@ -14,7 +14,8 @@
   <body>
     <div class="container">
       <h1>Sign Up</h1>
-      <form>
+      <form id="signup-form">
+        <!-- Add id to the form -->
         <label for="fullname">Full Name:</label>
         <input type="text" id="fullname" name="fullname" required />
 
@@ -24,21 +25,25 @@
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required />
 
-        <label for="confirm_password">Confirm Password:</label>
-        <input
-          type="password"
-          id="confirm_password"
-          name="confirm_password"
-          required
-        />
-
+        <!-- User type dropdown -->
+        <label for="user-type">User Type:</label>
+        <div class="custom-select">
+          <select id="user-type" name="user-type" required>
+            <option value="" disabled selected>Select user type</option>
+            <option value="1">Admin</option>
+            <option value="2">Normal User</option>
+          </select>
+        </div>
         <div class="btn-container">
-          <button type="submit">Sign Up</button>
+          <button type="submit" id="btn-signup">Sign Up</button>
           <a href="C:\Users\Dell\Desktop\E-commerce-FE\pages\sign_in.html"
             >Cancel</a
           >
         </div>
       </form>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.23.0/axios.min.js"></script>
+    <script src="../scripts/sign_up.js"></script>
   </body>
 </html>
