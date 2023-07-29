@@ -14,19 +14,21 @@ function isValidName(name) {
 }
 
 function move() {
-  window.location.href = "../pages/signin.html";
+  window.location.href = "../pages/sign_in.html";
 }
 
-const btn = document.querySelector(".btn-signin"); 
+const form = document.getElementById("signup-form");
 const err = document.getElementById("error");
 
-btn.addEventListener("click", () => {
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+
   const fullname = document.getElementById("fullname").value;
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
   const userType = document.getElementById("user-type").value;
-  
-  
+
+  // Reset error messages
   err.innerText = "";
 
   if (!isValidEmail(email)) {
@@ -39,12 +41,10 @@ btn.addEventListener("click", () => {
   } else if (userType === "") {
     err.innerText = "Choose a user type";
   } else {
-
-    //  proceed with the POST request
+    // If all validations pass, proceed with the POST request
     console.log(userType);
     err.innerText = "";
 
-    
     const userData = {
       name: fullname,
       email: email,
@@ -52,7 +52,7 @@ btn.addEventListener("click", () => {
       user_types_id: userType,
     };
 
-      axios
+    axios
       .post("http://127.0.0.1:8000/api/register", userData)
       .then((response) => {
         console.log(response.data);
