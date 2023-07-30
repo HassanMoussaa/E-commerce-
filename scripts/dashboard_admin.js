@@ -18,6 +18,7 @@ function createProductCard(product) {
   productDescription.textContent = product.description;
   productDescription.classList.add("product-description");
 
+// delete button
   const deleteButton = document.createElement("button");
   deleteButton.textContent = "Delete";
   deleteButton.classList.add("delete-button");
@@ -26,7 +27,7 @@ function createProductCard(product) {
     deleteProduct(product.id);
   });
 
-  // Add update button
+  // update button
   const updateButton = document.createElement("button");
   updateButton.textContent = "Update";
   updateButton.classList.add("update-button");
@@ -88,7 +89,7 @@ function fetchProducts() {
 // Function to delete a product
 function deleteProduct(productId) {
   axios
-    .delete(`http://127.0.0.1:8000/api/products/${productId}`)
+    .delete(`http://127.0.0.1:8000/api/products/delete/${productId}`)
     .then((response) => {
       
       fetchProducts();
