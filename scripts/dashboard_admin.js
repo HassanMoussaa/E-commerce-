@@ -86,16 +86,16 @@ function fetchProducts() {
     });
 }
 
-// Function to delete a product
 function deleteProduct(productId) {
   axios
     .delete(`http://127.0.0.1:8000/api/products/delete/${productId}`)
     .then((response) => {
+      console.log("Product deleted successfully:", response.data.message);
       
       fetchProducts();
     })
     .catch((error) => {
-      console.error(error);
+      console.error("Failed to delete product:", error);
     });
 }
 
