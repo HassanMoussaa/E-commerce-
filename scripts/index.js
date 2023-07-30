@@ -39,7 +39,9 @@ function populateProductContainer(containerId, products) {
 // Function to fetch products data from the API
 function fetchProducts() {
   axios
-    .get("http://127.0.0.1:8000/api/products")
+    .get("http://127.0.0.1:8000/api/products",{headers:{
+        Authorization: `Bearer ${window.localStorage.getItem("jwt_token")}`
+    }})
     .then((response) => {
       const responseData = response.data;
       const clothingProducts = [];

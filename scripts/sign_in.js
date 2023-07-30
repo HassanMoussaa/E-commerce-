@@ -22,11 +22,10 @@ form.addEventListener("submit", (event) => {
         err.innerText = "";
 
         const userTypeId = response.data.user.user_types_id;
-        console.log("before")
-        console.log(userTypeId)
-        console.log("after")
+        console.log(response.data)
         window.localStorage.setItem('id', response.data.user.id);
         window.localStorage.setItem('user_type_id', userTypeId);
+        window.localStorage.setItem('jwt_token',response.data.authorization.token)
           //admin 
         if (userTypeId === 1) {
           window.location.href = "../pages/dashboard_admin.html";
