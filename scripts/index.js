@@ -6,9 +6,8 @@ function createProductCard(product) {
   const imageContainer = document.createElement("div");
   imageContainer.classList.add("product-image");
   const image = document.createElement("img");
-  image.src = product.image_url; // Assuming you have the image_url in the product data
-  console.log(product.image_url);
-  image.alt = product.name; // Use product name as the alt attribute
+  image.src = product.image_url; 
+  image.alt = product.name; 
   imageContainer.appendChild(image);
 
   const productName = document.createElement("p");
@@ -47,7 +46,7 @@ function fetchProducts() {
       const shoesProducts = [];
       const accessoriesProducts = [];
 
-      // Iterate through the products and separate them based on category_id
+      
       responseData.forEach((product) => {
         if (product.category_id === 1) {
           clothingProducts.push(product);
@@ -58,14 +57,14 @@ function fetchProducts() {
         }
       });
 
-      // Assuming you have separate containers with IDs "containerClothing", "containerShoes", and "containerAccessories"
+     
       populateProductContainer("containerClothing", clothingProducts);
       populateProductContainer("containerShoes", shoesProducts);
       populateProductContainer("containerAccessories", accessoriesProducts);
     })
     .catch((error) => {
       console.error(error);
-      // Handle error if needed
+      
     });
 }
 
