@@ -21,8 +21,10 @@ form.addEventListener("submit", (event) => {
       } else {
         err.innerText = "";
 
-        const userTypeId = response.data.user.user_type_id;
-
+        const userTypeId = response.data.user.user_types_id;
+        console.log("before")
+        console.log(userTypeId)
+        console.log("after")
         window.localStorage.setItem('id', response.data.user.id);
         window.localStorage.setItem('user_type_id', userTypeId);
           //admin 
