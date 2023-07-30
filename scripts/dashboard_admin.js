@@ -18,10 +18,29 @@ function createProductCard(product) {
   productDescription.textContent = product.description;
   productDescription.classList.add("product-description");
 
+  const deleteButton = document.createElement("button");
+  deleteButton.textContent = "Delete";
+  deleteButton.classList.add("delete-button");
+  deleteButton.addEventListener("click", () => {
+    
+    deleteProduct(product.id);
+  });
+
+  // Add update button
+  const updateButton = document.createElement("button");
+  updateButton.textContent = "Update";
+  updateButton.classList.add("update-button");
+  updateButton.addEventListener("click", () => {
+    
+    updateProduct(product.id);
+  });
+
   // Append elements to the card container
   cardContainer.appendChild(imageContainer);
   cardContainer.appendChild(productName);
   cardContainer.appendChild(productDescription);
+  cardContainer.appendChild(deleteButton);
+  cardContainer.appendChild(updateButton);
 
   return cardContainer;
 }
@@ -29,6 +48,7 @@ function createProductCard(product) {
 // Function to populate the product container
 function populateProductContainer(containerId, products) {
   const container = document.getElementById(containerId);
+  container.innerHTML = ""; 
 
   products.forEach((product) => {
     const productCard = createProductCard(product);
@@ -46,7 +66,6 @@ function fetchProducts() {
       const shoesProducts = [];
       const accessoriesProducts = [];
 
-      
       responseData.forEach((product) => {
         if (product.category_id === 1) {
           clothingProducts.push(product);
@@ -57,15 +76,31 @@ function fetchProducts() {
         }
       });
 
-     
       populateProductContainer("containerClothing", clothingProducts);
       populateProductContainer("containerShoes", shoesProducts);
       populateProductContainer("containerAccessories", accessoriesProducts);
     })
     .catch((error) => {
       console.error(error);
-      
     });
+}
+
+// Function to delete a product
+function deleteProduct(productId) {
+  axios
+    .delete(`http://127.0.0.1:8000/api/products/${productId}`)
+    .then((response) => {
+      
+      fetchProducts();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+// Function to update a product
+function updateProduct(productId) {
+ 
 }
 
 
