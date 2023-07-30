@@ -62,6 +62,7 @@
               <i
                 class="fas fa-plus-circle addProductIcon"
                 title="Add Product"
+                id="addByAdmin"
               ></i>
             </a>
           </div>
@@ -97,7 +98,7 @@
       </div>
     </section>
 
-    <!-- Modal -->
+    <!-- Modal for update-->
     <div id="modal" class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
@@ -125,6 +126,43 @@
             <option value="3">Accessories</option>
           </select>
           <button type="button" id="modalUpdateButton">Update Product</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal for adding products -->
+    <div id="addModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Add Product</h2>
+        <form enctype="multipart/form-data">
+          <label for="addProductName">Name:</label>
+          <input
+            type="text"
+            id="addProductName"
+            name="addProductName"
+            required
+          />
+          <label for="addProductImage">Image:</label>
+          <input
+            type="file"
+            id="addProductImage"
+            name="addProductImage"
+            accept="image/*"
+          />
+          <label for="addProductDescription">Description:</label>
+          <textarea
+            id="addProductDescription"
+            name="addProductDescription"
+            required
+          ></textarea>
+          <label for="addProductCategory">Category:</label>
+          <select id="addProductCategory" name="addProductCategory" required>
+            <option value="1">Clothing</option>
+            <option value="2">Shoes</option>
+            <option value="3">Accessories</option>
+          </select>
+          <button type="button" id="modalAddButton">Add Product</button>
         </form>
       </div>
     </div>

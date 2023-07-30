@@ -174,5 +174,83 @@ function updateProduct(productId, formData) {
 }
 
 
+const addProductIcon = document.getElementById("addByAdmin");
+const addModal = document.getElementById("addModal");
+
+addProductIcon.addEventListener("click", () => {
+  openAddModal();
+});
+
+function openAddModal() {
+  const modal = document.getElementById("addModal");
+  const closeButton = modal.querySelector(".close");
+  const addButton = document.getElementById("modalAddButton");
+  const productNameInput = document.getElementById("addProductName");
+  const productImageInput = document.getElementById("addProductImage");
+  const productDescriptionInput = document.getElementById("addProductDescription");
+  const productCategoryInput = document.getElementById("addProductCategory");
+
+  // Show the modal
+  modal.style.display = "block";
+
+  // Close the modal when the close button is clicked
+  closeButton.onclick = function () {
+    modal.style.display = "none";
+  };
+
+  // Close the modal when the user clicks outside of it
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
+
+  // Call the addProduct function when the add button is clicked
+  addButton.onclick = function () {
+    const newProduct = {
+      name: productNameInput.value,
+      description: productDescriptionInput.value,
+      category_id: productCategoryInput.value,
+    };
+
+    // Get the selected image file and add it to the new product object
+    const imageFile = productImageInput.files[0];
+    if (imageFile) {
+      const formData = new FormData();
+      formData.append("image", imageFile);
+      formData.append("name", newProduct.name);
+      formData.append("description", newProduct.description);
+      formData.append("category_id", newProduct.category_id);
+      addProduct(formData);
+    } else {
+      addProduct(newProduct);
+    }
+    modal.style.display = "none";
+  };
+}
+
+function addProduct(formData) {
+  // Call your API here to add the product with the provided form data
+  axios
+    .post("http://127.0.0.1:8000/api/products/add", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${window.localStorage.getItem("jwt_token")}`,
+      },
+    })
+    .then((response) => {
+      console.log(response.data.message);
+      fetchProducts(); // Refresh the product list after adding a new product
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+
+
+
+
+
 
 document.addEventListener("DOMContentLoaded", fetchProducts);
