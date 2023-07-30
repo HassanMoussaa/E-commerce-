@@ -96,6 +96,39 @@
         </div>
       </div>
     </section>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Update Product</h2>
+        <form enctype="multipart/form-data">
+          <label for="productName">Name:</label>
+          <input type="text" id="productName" name="productName" required />
+          <label for="productImage">Image:</label>
+          <input
+            type="file"
+            id="productImage"
+            name="productImage"
+            accept="image/*"
+          />
+          <label for="productDescription">Description:</label>
+          <textarea
+            id="productDescription"
+            name="productDescription"
+            required
+          ></textarea>
+          <label for="productCategory">Category:</label>
+          <select id="productCategory" name="productCategory" required>
+            <option value="1">Clothing</option>
+            <option value="2">Shoes</option>
+            <option value="3">Accessories</option>
+          </select>
+          <button type="button" id="modalUpdateButton">Update Product</button>
+        </form>
+      </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.23.0/axios.min.js"></script>
     <script src="../scripts/dashboard_admin.js"></script>
   </body>

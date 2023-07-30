@@ -32,7 +32,7 @@ function createProductCard(product) {
   updateButton.classList.add("update-button");
   updateButton.addEventListener("click", () => {
     
-    updateProduct(product.id);
+    openModal(product.id);
   });
 
   // Append elements to the card container
@@ -87,9 +87,12 @@ function fetchProducts() {
     });
 }
 
+// for delete product 
 function deleteProduct(productId) {
   axios
-    .delete(`http://127.0.0.1:8000/api/products/delete/${productId}`)
+    .delete(`http://127.0.0.1:8000/api/products/delete/${productId}`,{headers:{
+        Authorization: `Bearer ${window.localStorage.getItem("jwt_token")}`
+    }})
     .then((response) => {
       console.log("", response.data.message);
       
@@ -100,10 +103,76 @@ function deleteProduct(productId) {
     });
 }
 
-// Function to update a product
-function updateProduct(productId) {
+
+//part for update 
+// Update the openModal function to accept the product ID as a parameter
+function openModal(productId) {
+  const modal = document.getElementById("modal");
+  const closeButton = document.getElementsByClassName("close")[0];
+  const updateButton = document.getElementById("modalUpdateButton");
+  const productNameInput = document.getElementById("productName");
+  const productImageInput = document.getElementById("productImage");
+  const productDescriptionInput = document.getElementById("productDescription");
+  const productCategoryInput = document.getElementById("productCategory");
+
  
+  modal.style.display = "block";
+
+ 
+  closeButton.onclick = function () {
+    modal.style.display = "none";
+  };
+
+  
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
+
+  
+  updateButton.onclick = function () {
+    const updatedProduct = {
+      name: productNameInput.value,
+      description: productDescriptionInput.value,
+      category_id: productCategoryInput.value,
+    };
+
+   
+    const imageFile = productImageInput.files[0];
+    console.log
+    if (imageFile) {
+      const formData = new FormData();
+      formData.append("image", imageFile);
+      formData.append("name", updatedProduct.name);
+      formData.append("description", updatedProduct.description);
+      formData.append("category_id", updatedProduct.category_id);
+      updateProduct(productId, formData);
+    } else {
+      updateProduct(productId, updatedProduct);
+    }
+    modal.style.display = "none";
+  };
 }
+
+function updateProduct(productId, formData) {
+  axios
+    .put(`http://127.0.0.1:8000/api/products/update/${productId}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${window.localStorage.getItem("jwt_token")}`,
+      },
+    })
+    .then((response) => {
+      console.log(response.data.message);
+      closeModal();
+      fetchProducts();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
 
 
 document.addEventListener("DOMContentLoaded", fetchProducts);
