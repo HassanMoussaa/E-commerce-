@@ -1,3 +1,4 @@
+/* added extra styling for specific admin  */
 .delete-button,
 .update-button {
   padding: 5px 10px;
@@ -125,4 +126,302 @@ form select {
   right: 10px;
   font-size: 20px;
   cursor: pointer;
+}
+/* added css styling from other stylesheet plus responsivness */
+body {
+  margin: 0;
+}
+
+/* header work */
+#badge {
+  position: absolute;
+  background-color: rgb(255, 30, 30);
+  color: white;
+  border-radius: 50%;
+  padding: 5px 8px;
+  font-size: 14px;
+  top: 10px;
+  right: 158px;
+}
+#container {
+  background-color: white;
+  margin: auto;
+  text-align: center;
+  width: 100%;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 1.5fr 1.5fr 5fr 1fr;
+  font-family: "Lato", sans-serif;
+  z-index: 1;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  box-sizing: border-box;
+  position: fixed;
+  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302),
+    0 2px 6px 2px rgba(60, 64, 67, 0.149);
+}
+#shopName {
+  font-size: 40px;
+  font-family: "Lato", sans-serif;
+}
+#shopName a {
+  text-decoration: none;
+  color: rgb(29, 29, 29);
+}
+#shopName > b {
+  font-weight: 900;
+  font: black;
+}
+
+#collection {
+  font-weight: bold;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+#collection a {
+  text-decoration: none;
+  color: rgb(29, 29, 29);
+}
+
+.search {
+  padding: 14px;
+  /* color: gray; */
+  color: rgb(29, 29, 29);
+  min-width: 25px;
+  text-align: center;
+  position: absolute;
+}
+
+.addedToCart {
+  font-size: 1.5em;
+  margin-right: 25px;
+}
+#user {
+  display: flex;
+  /* float: right; */
+  align-items: center;
+}
+
+.userIcon {
+  font-size: 45px;
+}
+#input {
+  width: 35em;
+  height: 3em;
+  padding: 2px 50px;
+  background-color: rgb(241, 241, 241);
+  border: none;
+  border-radius: 5px;
+}
+#input::placeholder {
+  font-weight: bold;
+}
+#input:focus {
+  outline: none;
+}
+#user a {
+  color: rgb(29, 29, 29);
+}
+
+/* for slider section  */
+#containerSlider {
+  margin: auto;
+  width: 90%;
+  text-align: center;
+  padding-top: 100px;
+  box-sizing: border-box;
+}
+#containerSlider img {
+  width: 100%;
+  height: 140%;
+  text-align: center;
+  align-content: center;
+}
+
+/* for posts section */
+.postsSection h1 {
+  width: 90%;
+  margin: auto;
+  padding: 50px 0;
+  letter-spacing: 2px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+#containerClothing,
+#containerAccessories {
+  display: grid;
+  grid-gap: 70px 20px;
+  grid-template-columns: repeat(5, 1fr);
+  width: 90%;
+  margin: auto;
+  padding-bottom: 40px;
+}
+#box {
+  width: 100%;
+  background-color: white;
+  align-content: center;
+  border-radius: 10px;
+  box-shadow: 1px 2px 6px 2px rgb(219, 219, 219);
+}
+#box:hover {
+  box-shadow: 1px 6px 3px 0 rgb(185, 185, 185);
+}
+#containerClothing img {
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+#containerAccessories img {
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+#details {
+  padding: 0 15px;
+  text-transform: capitalize;
+}
+#box a {
+  text-decoration: none;
+  color: rgb(29, 29, 29);
+}
+.postsSection h3 {
+  font-size: 16px;
+}
+.postsSection h4 {
+  font-weight: 100;
+}
+.postsSection h2 {
+  color: rgb(3, 94, 94);
+}
+
+/* for responsive header  */
+
+@media (min-width: 1101px) and (max-width: 1212px) {
+  #container {
+    grid-template-columns: 1fr 1fr 4fr;
+  }
+
+  .postsSection h1 {
+    font-size: 25px;
+  }
+  #containerClothing,
+  #containerAccessories {
+    width: 95%;
+    grid-gap: 10px;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1100px) {
+  #container {
+    grid-template-columns: 1fr 1fr 5fr;
+  }
+
+  #collection {
+    display: grid;
+  }
+
+  #search {
+    grid-column: 3 / span 1;
+  }
+
+  #user {
+    grid-column: 4 / span 1;
+  }
+
+  #input {
+    max-width: 30em;
+  }
+}
+
+@media (max-width: 900px) {
+  #container {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  #collection {
+    display: none;
+  }
+
+  #search {
+    grid-column: span 2;
+  }
+
+  #user {
+    grid-column: span 2;
+  }
+
+  #input {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  #containerSlider img {
+    height: 12em;
+    margin-top: 8rem;
+  }
+  .postsSection h1 {
+    width: 80%;
+  }
+  #containerClothing,
+  #containerAccessories {
+    display: grid;
+    grid-gap: 70px 20px;
+    grid-template-columns: repeat(3, 1fr);
+    width: 80%;
+  }
+}
+
+@media (max-width: 732px) {
+  #containerSlider img {
+    height: 12em;
+  }
+}
+
+@media (max-width: 650px) {
+  #container {
+    grid-template-columns: 1fr;
+    padding: 10px;
+  }
+
+  #shopName {
+    font-size: 30px;
+  }
+
+  #input {
+    padding: 2px 20px;
+  }
+
+  #user {
+    grid-column: span 2;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .postsSection h1 {
+    font-size: 20px;
+  }
+  .postsSection h1 {
+    width: 90%;
+  }
+  #containerClothing,
+  #containerAccessories {
+    width: 90%;
+  }
+}
+
+@media (max-width: 500px) {
+  #containerSlider img {
+    height: 10em;
+  }
+
+  .postsSection h1 {
+    width: 80%;
+  }
+  #containerClothing,
+  #containerAccessories {
+    width: 80%;
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
