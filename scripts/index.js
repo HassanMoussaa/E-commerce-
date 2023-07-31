@@ -109,11 +109,8 @@ function addToCart(product) {
     .then((response) => {
       console.log("Product added to cart:", product.name);
       
-      showCartMessage("Product added to cart successfully!");
+      showCartMessage(response.data.message);
       
-    //   const cartItems = JSON.parse(window.localStorage.getItem("cart_items")) || [];
-    //   cartItems.push(product.id);
-    //   window.localStorage.setItem("cart_items", JSON.stringify(cartItems));
     })
     .catch((error) => {
       console.error("Error adding product to cart:", error);
