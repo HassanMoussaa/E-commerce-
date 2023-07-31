@@ -30,8 +30,17 @@ function createProductCard(product) {
   //  heart icon for favorites 
   const heartIcon = document.createElement("i");
   heartIcon.classList.add("fas", "fa-heart", "heart-icon");
+  heartIcon.id = `heart-icon-${product.id}`;
 
- 
+//   if (isProductFavorited(product.id)) {
+//     heartIcon.classList.add("favorited");
+//   }
+
+  heartIcon.addEventListener("click", () => {
+    toggleFavoriteStatus(product.id); 
+  });
+
+
   cardContainer.appendChild(imageContainer);
   cardContainer.appendChild(productName);
   cardContainer.appendChild(productDescription);
@@ -146,6 +155,43 @@ function addToCart(product) {
     cartIcon.addEventListener("click", () => {
     window.location.href = "cart.html";
     });
+
+
+
+// API call to toggle favorite status
+function toggleFavoriteStatus(productId) {
+  const token = window.localStorage.getItem("jwt_token");
+  if (!token) {
+    
+    console.error("User is not authenticated. Please log in.");
+    return;
+  }
+
+  axios
+    .post(
+      "http://127.0.0.1:8000/api/favorites/add",
+      { product_id: productId },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+    .then((response) => {
+      console.log(response.data.message);
+      
+      const heartIcon = document.querySelector(`#heart-icon-${productId}`);
+      if (response.data.message === "Product added to favorites") {
+        heartIcon.classList.add("favorited");
+      } else if (response.data.message === "Product removed from favorites") {
+        heartIcon.classList.remove("favorited");
+      }
+    })
+    .catch((error) => {
+      console.error("Error adding/removing product to/from favorites:", error);
+    });
+}
+
 
 
 document.addEventListener("DOMContentLoaded", fetchProducts);
