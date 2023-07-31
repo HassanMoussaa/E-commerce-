@@ -142,4 +142,13 @@ function addToCart(product) {
 
 
 
+    // Get the cart icon element
+    const cartIcon = document.querySelector(".addedToCart");
+
+    
+    cartIcon.addEventListener("click", () => {
+    window.location.href = "cart.html";
+    });
+
+
 document.addEventListener("DOMContentLoaded", fetchProducts);
