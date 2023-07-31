@@ -53,3 +53,7 @@
 #cart-message.show {
   display: block;
 }
+
+.heart-icon {
+  margin-left: 5rem;
+}
