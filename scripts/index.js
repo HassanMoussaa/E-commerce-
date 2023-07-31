@@ -18,10 +18,24 @@ function createProductCard(product) {
   productDescription.textContent = product.description;
   productDescription.classList.add("product-description");
 
-  // Append elements to the card container
+   //  Add to Cart button
+  const addToCartButton = document.createElement("button");
+  addToCartButton.textContent = "Add to Cart";
+  addToCartButton.classList.add("add-to-cart-button");
+  addToCartButton.addEventListener("click", () => {
+    addToCart(product); 
+  });
+
+  //  heart icon for favorites 
+  const heartIcon = document.createElement("i");
+  heartIcon.classList.add("fas", "fa-heart", "heart-icon");
+
+ 
   cardContainer.appendChild(imageContainer);
   cardContainer.appendChild(productName);
   cardContainer.appendChild(productDescription);
+  cardContainer.appendChild(addToCartButton);
+  cardContainer.appendChild(heartIcon); 
 
   return cardContainer;
 }
@@ -66,6 +80,32 @@ function fetchProducts() {
     })
     .catch((error) => {
       console.error(error);
+      
+    });
+}
+
+
+
+// Function to handle adding items to the cart
+function addToCart(product) {
+  const cartId = window.localStorage.getItem("cart_id");
+
+  // Send a request to the backend to add the product to the cart
+  axios
+    .post("http://127.0.0.1:8000/api/add_to_cart", {
+      cart_id: cartId,
+      product_id: product.id,
+    }, {
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem("jwt_token")}`,
+      },
+    })
+    .then((response) => {
+      console.log("Product added to cart:", product.name);
+      
+    })
+    .catch((error) => {
+      console.error("Error adding product to cart:", error);
       
     });
 }

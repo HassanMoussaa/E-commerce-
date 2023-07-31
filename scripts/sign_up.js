@@ -57,6 +57,10 @@ form.addEventListener("submit", (e) => {
       .then((response) => {
         console.log(response.data);
         if (response.data.message === "User created successfully") {
+            
+        // Save the cart ID in local storage
+          const cartId = response.data.cart.id;
+          window.localStorage.setItem("cart_id", cartId);
           err.setAttribute("class", "success");
           err.innerText = "Created successfully!";
           setTimeout(move, 2000);
