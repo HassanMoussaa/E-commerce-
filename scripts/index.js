@@ -22,6 +22,7 @@ function createProductCard(product) {
   const addToCartButton = document.createElement("button");
   addToCartButton.textContent = "Add to Cart";
   addToCartButton.classList.add("add-to-cart-button");
+  addToCartButton.id = `add-to-cart-${product.id}`;
   addToCartButton.addEventListener("click", () => {
     addToCart(product); 
   });
@@ -90,6 +91,11 @@ function fetchProducts() {
 function addToCart(product) {
   const cartId = window.localStorage.getItem("cart_id");
 
+  // Disable the "Add to Cart" button
+  const addToCartButton = document.getElementById(`add-to-cart-${product.id}`);
+  addToCartButton.disabled = true;
+  addToCartButton.textContent = "Added to Cart";
+
   // Send a request to the backend to add the product to the cart
   axios
     .post("http://127.0.0.1:8000/api/add_to_cart", {
@@ -103,12 +109,37 @@ function addToCart(product) {
     .then((response) => {
       console.log("Product added to cart:", product.name);
       
+      showCartMessage("Product added to cart successfully!");
+      
+    //   const cartItems = JSON.parse(window.localStorage.getItem("cart_items")) || [];
+    //   cartItems.push(product.id);
+    //   window.localStorage.setItem("cart_items", JSON.stringify(cartItems));
     })
     .catch((error) => {
       console.error("Error adding product to cart:", error);
+     
+      showCartMessage("An error occurred. Please try again later.");
       
+      addToCartButton.disabled = false;
+      addToCartButton.textContent = "Add to Cart";
     });
 }
+
+
+    // Function to show the cart message on the screen
+    function showCartMessage(message) {
+    const cartMessageDiv = document.getElementById("cart-message");
+    cartMessageDiv.textContent = message;
+
+    cartMessageDiv.classList.add("show");
+
+    setTimeout(() => {
+    cartMessageDiv.textContent = "";
+    
+    cartMessageDiv.classList.remove("show");
+    }, 3000); 
+    }
+
 
 
 document.addEventListener("DOMContentLoaded", fetchProducts);
