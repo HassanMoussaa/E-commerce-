@@ -252,6 +252,28 @@ function addProduct(formData) {
 }
 
 
+const logoutLink = document.getElementById("logoutLink");
+
+logoutLink.addEventListener("click", () => {
+  // Make an API call to the logout endpoint
+  axios
+    .post("http://127.0.0.1:8000/api/logout", null, {
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem("jwt_token")}`,
+      },
+    })
+    .then((response) => {
+      
+      console.log(response.data.message);
+      window.location.href = "sign_in.html"; 
+    }) 
+    .catch((error) => {
+      
+      console.error("Logout failed:", error);
+    });
+});
+
+
 
 
 
