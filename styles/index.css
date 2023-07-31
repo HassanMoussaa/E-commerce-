@@ -61,7 +61,7 @@
 .heart-icon {
   font-size: 24px;
   cursor: pointer;
-  transition: color 0.3s ease;
+  transition: color 0.1s ease;
 }
 .favorited {
   color: red;

@@ -155,9 +155,13 @@ function openModal(productId) {
   };
 }
 
+function closeModal() {
+  const modal = document.getElementById("modal");
+  modal.style.display = "none";
+}
 function updateProduct(productId, formData) {
   axios
-    .put(`http://127.0.0.1:8000/api/products/update/${productId}`, formData, {
+    .post(`http://127.0.0.1:8000/api/products/update/${productId}`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${window.localStorage.getItem("jwt_token")}`,
