@@ -1,6 +1,15 @@
 const form = document.querySelector("form");
 const err = document.getElementById("error");
 
+document.addEventListener("DOMContentLoaded", function () {
+  const signUpButton = document.getElementById("sign_up");
+  signUpButton.addEventListener("click", function () {
+    window.location.href = "sign_up.html";
+  });
+});
+
+
+
 form.addEventListener("submit", (event) => {
   event.preventDefault(); // Prevent default form submission behavior
 
@@ -40,4 +49,6 @@ form.addEventListener("submit", (event) => {
       console.error(error); 
       err.innerText = "An error occurred. Please try again later.";
     });
+
+
 });
