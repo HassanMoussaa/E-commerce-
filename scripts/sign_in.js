@@ -6,12 +6,12 @@ form.addEventListener("submit", (event) => {
 
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
-  const userType = document.getElementById("user-type").value;
+//   const userType = document.getElementById("user-type").value;
 
   const data = new FormData();
   data.append("email", email);
   data.append("password", password);
-  data.append("user_types_id", userType);
+//   data.append("user_types_id", userType);
 
   axios.post("http://127.0.0.1:8000/api/login", data)
     .then((response) => {
