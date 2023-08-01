@@ -251,7 +251,7 @@ function addProduct(formData) {
     });
 }
 
-
+// work for logout 
 const logoutLink = document.getElementById("logoutLink");
 
 logoutLink.addEventListener("click", () => {
