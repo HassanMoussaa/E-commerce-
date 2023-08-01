@@ -1,3 +1,9 @@
+
+// for fav feature 
+if (!localStorage.getItem("favorites")) {
+  localStorage.setItem("favorites", JSON.stringify([]));
+}
+
 // Function to create a product card
 function createProductCard(product) {
   const cardContainer = document.createElement("div");
@@ -32,9 +38,9 @@ function createProductCard(product) {
   heartIcon.classList.add("fas", "fa-heart", "heart-icon");
   heartIcon.id = `heart-icon-${product.id}`;
 
-//   if (isProductFavorited(product.id)) {
-//     heartIcon.classList.add("favorited");
-//   }
+  if (isProductFavorited(product.id)) {
+    heartIcon.classList.add("favorited");
+  }
 
   heartIcon.addEventListener("click", () => {
     toggleFavoriteStatus(product.id); 
@@ -162,10 +168,12 @@ function addToCart(product) {
 function toggleFavoriteStatus(productId) {
   const token = window.localStorage.getItem("jwt_token");
   if (!token) {
-    
     console.error("User is not authenticated. Please log in.");
     return;
   }
+
+  // Get the list of favorited product IDs from local storage
+  let favorites = JSON.parse(window.localStorage.getItem("favorites"));
 
   axios
     .post(
@@ -179,19 +187,43 @@ function toggleFavoriteStatus(productId) {
     )
     .then((response) => {
       console.log(response.data.message);
-      
-      const heartIcon = document.querySelector(`#heart-icon-${productId}`);
+
+      // Update the favorites list based on the response
       if (response.data.message === "Product added to favorites") {
-        heartIcon.classList.add("favorited");
+        if (!favorites.includes(productId)) {
+          favorites.push(productId);
+        }
       } else if (response.data.message === "Product removed from favorites") {
+        const index = favorites.indexOf(productId);
+        if (index !== -1) {
+          favorites.splice(index, 1);
+        }
+      }
+
+      // Save the updated favorites list to local storage
+      window.localStorage.setItem("favorites", JSON.stringify(favorites));
+
+      // Update the heart icon class based on the updated favorites list
+      const heartIcon = document.querySelector(`#heart-icon-${productId}`);
+      if (favorites.includes(productId)) {
+        heartIcon.classList.add("favorited");
+      } else {
         heartIcon.classList.remove("favorited");
       }
     })
     .catch((error) => {
-      console.error("Error adding/removing product to/from favorites:", error);
+      console.error("Error toggling product favorite status:", error);
     });
 }
 
+
+    function isProductFavorited(productId) {
+    // Get the list of favorited product IDs from local storage
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+    // Check if the given product ID exists in the favorites list
+    return favorites.includes(productId);
+    }
 
 
 // work for logout 
